@@ -1,0 +1,11 @@
+# algorithm_times.txt
+
+linear search (1,000,000) --> 0.410 seconds
+binary search (1,000,000) --> 1.35e-05 seconds
+bubble sort (10000) --> 5.23 seconds
+selection sort (10000) --> 2.71 seconds
+insertion sort (10000) --> 1.91 seconds
+recursive linear search (1000) --> 0.00316 seconds
+recursive binary search (10,000,000) --> 0.101 seconds
+quick sort (10000) --> 0.0160 seconds
+heap sort (10000) --> 0.0479 seconds
