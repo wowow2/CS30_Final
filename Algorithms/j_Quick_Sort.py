@@ -8,46 +8,46 @@ Date: 2023/02/14
 
 from myFunctions import *
 
-def quicksort(LIST, FIRST_INDEX, LAST_INDEX):
+def quicksort(list_, first_index, last_index):
     """
     quicksort
-    :param LIST: list(int)
-    :param FIRST_INDEX: int
-    :param LAST_INDEX: int
+    :param list_: list(int)
+    :param first_index: int
+    :param last_index: int
     :return: None
     """
-    if FIRST_INDEX < LAST_INDEX:
-        PIVOT_VALUE = LIST[FIRST_INDEX]
-        LEFT_INDEX = FIRST_INDEX + 1
-        RIGHT_INDEX = LAST_INDEX
+    if first_index < last_index:
+        pivot_value = list_[first_index]
+        left_index = first_index + 1
+        right_index = last_index
 
-        DONE = False
-        while not DONE:
-            while LEFT_INDEX <= RIGHT_INDEX and LIST[LEFT_INDEX] <= PIVOT_VALUE:
-                LEFT_INDEX += 1
-            while RIGHT_INDEX >= LEFT_INDEX and LIST[RIGHT_INDEX] >= PIVOT_VALUE:
-                RIGHT_INDEX -= 1
+        done = False
+        while not done:
+            while left_index <= right_index and list_[left_index] <= pivot_value:
+                left_index += 1
+            while right_index >= left_index and list_[right_index] >= pivot_value:
+                right_index -= 1
 
-            if RIGHT_INDEX < LEFT_INDEX:
-                DONE = True
+            if right_index < left_index:
+                done = True
             else:
-                TEMP = LIST[LEFT_INDEX]
-                LIST[LEFT_INDEX] = LIST[RIGHT_INDEX]
-                LIST[RIGHT_INDEX] = TEMP
-        TEMP = LIST[FIRST_INDEX]
-        LIST[FIRST_INDEX] = LIST[RIGHT_INDEX]
-        LIST[RIGHT_INDEX] = TEMP
+                temp = list_[left_index]
+                list_[left_index] = list_[right_index]
+                list_[right_index] = temp
+        temp = list_[first_index]
+        list_[first_index] = list_[right_index]
+        list_[right_index] = temp
 
-        quicksort(LIST, FIRST_INDEX, RIGHT_INDEX-1)
-        quicksort(LIST, RIGHT_INDEX+1, LAST_INDEX)
+        quicksort(list_, first_index, right_index-1)
+        quicksort(list_, right_index+1, last_index)
 
 if __name__ == "__main__":
 
-    TIMES = []
+    times = []
     for i in range(30):
-        NUMBERS = getRandomList(10000)
-        START = getTime()
-        quicksort(NUMBERS, 0, len(NUMBERS) -1)
-        END = getTime()
-        TIMES.append(END - START)
-    print(f"Average:{getAverage(TIMES)} seconds")
+        numbers = getRandomList(10000)
+        start = getTime()
+        quicksort(numbers, 0, len(numbers) -1)
+        end = getTime()
+        times.append(end - start)
+    print(f"Average:{getAverage(times)} seconds")
