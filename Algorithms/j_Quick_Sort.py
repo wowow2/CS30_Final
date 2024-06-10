@@ -42,7 +42,7 @@ def quicksort(list_, first_index, last_index):
         quicksort(list_, right_index+1, last_index)
 
 if __name__ == "__main__":
-
+    '''
     times = []
     for i in range(30):
         numbers = getRandomList(10000)
@@ -51,3 +51,8 @@ if __name__ == "__main__":
         end = getTime()
         times.append(end - start)
     print(f"Average:{getAverage(times)} seconds")
+    '''
+
+    list = [5,3,7,1,6]
+    quicksort(list, 0, len(list) - 1)
+    print(list)

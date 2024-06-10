@@ -8,52 +8,61 @@ date-created: 2023/02/16
 
 from myFunctions import *
 
-def heapify(LIST, LEN_ARRAY, ROOT_INDEX):
+def heapify(lst, len_array, root_index):
     """
-    Heapifies all subtrees in the binary tree
-    :param LIST: list(int)
-    :param LEN_ARRAY: int - length of array
-    :param ROOT_INDEX: int - Parent index
+    Ensures the subtree rooted at root_index follows the max-heap property.
+    :param lst: list(int) - The list to be heapified
+    :param len_array: int - The length of the array
+    :param root_index: int - The root index of the subtree to heapify
     :return: None
     """
 
-    LARGEST_INDEX = ROOT_INDEX #Assuming root index is the highest
-    LEFT_INDEX = 2 * ROOT_INDEX + 1
-    RIGHT_INDEX = 2 * ROOT_INDEX + 2
+    # Initialize largest as root
+    largest_index = root_index
+    # Left child index calculation
+    left_index = 2 * root_index + 1
+    # Right child index calculation
+    right_index = 2 * root_index + 2
 
-    if LEFT_INDEX < LEN_ARRAY and LIST[ROOT_INDEX] < LIST[LEFT_INDEX]:
-        LARGEST_INDEX = LEFT_INDEX
+    # Check if left child exists and is greater than root
+    if left_index < len_array and lst[root_index] < lst[left_index]:
+        largest_index = left_index
 
-    if RIGHT_INDEX < LEN_ARRAY and LIST[LARGEST_INDEX] < LIST[RIGHT_INDEX]:
-        LARGEST_INDEX = RIGHT_INDEX
+    # Check if right child exists and is greater than the current largest
+    if right_index < len_array and lst[largest_index] < lst[right_index]:
+        largest_index = right_index
 
-    if LARGEST_INDEX != ROOT_INDEX:
-        TEMP = LIST[ROOT_INDEX]
-        LIST[ROOT_INDEX] = LIST[LARGEST_INDEX]
-        LIST[LARGEST_INDEX] = TEMP
+    # If the largest element is not the root, swap and continue heapifying
+    if largest_index != root_index:
+        # Swap root and largest
+        lst[root_index], lst[largest_index] = lst[largest_index], lst[root_index]
 
-        # heapify the root
-        heapify(LIST, LEN_ARRAY, LARGEST_INDEX)
+        # Recursively heapify the affected subtree
+        heapify(lst, len_array, largest_index)
 
-def heap_sort(LIST):
+def heap_sort(lst):
     """
-    Sorts the list
-    :param LIST: list(int)
+    Sorts a list in ascending order using the heap sort algorithm.
+    :param lst: list(int) - The list to be sorted
     :return: None
     """
 
-    LEN_ARRAY = len(LIST)
+    len_array = len(lst)
 
-    # build a max heap
-    for i in range(LEN_ARRAY-1, -1, -1):
-        heapify(LIST, LEN_ARRAY, i)
+    # Build a max-heap: reorganize the list into a heap
+    # Start from the last non-leaf node and heapify each node
+    for i in range(len_array // 2 - 1, -1, -1):
+        heapify(lst, len_array, i)
 
-    # Extract the highest value in the heap and recur
+    # One by one extract elements from the heap
+    for i in range(len_array - 1, 0, -1):
+        # Move current root (largest) to the end
+        lst[i], lst[0] = lst[0], lst[i]
 
-    for i in range(LEN_ARRAY-1, 0, -1):
-        LIST[i], LIST[0] = LIST[0], LIST[i]
+        # Call heapify on the reduced heap
+        heapify(lst, i, 0)
 
-        heapify(LIST, i, 0)
+
 
 
 if __name__ == "__main__":
@@ -61,7 +70,7 @@ if __name__ == "__main__":
     #NUMBERS = getSmallList()
     #heap_sort(NUMBERS)
     #print(NUMBERS)
-
+    '''
     TIMES = []
     for i in range(30):
         NUMBERS = getRandomList(10000)
@@ -71,3 +80,7 @@ if __name__ == "__main__":
         TIMES.append(END - START)
         print(TIMES[-1])
     print(f"Average:{getAverage(TIMES)} seconds")
+    '''
+    list = [5, 3, 7, 1, 6]
+    heap_sort(list)
+    print(list)
