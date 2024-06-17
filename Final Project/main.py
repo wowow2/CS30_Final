@@ -18,6 +18,7 @@ from otherclasses.pan import Pan
 from otherclasses.chicken import Chicken
 from otherclasses.playerDarts import playerDarts
 from otherclasses.eggcoins import eggCoins
+from otherclasses.oildarts import oilDarts
 class fryTheEgg:
     '''
     Game class for fry the egg
@@ -117,6 +118,7 @@ class fryTheEgg:
             WINDOW.getSurface().blit(PAN.getSurface(), PAN.getPOS())
 
             PRESSED_KEYS = pygame.key.get_pressed()
+            print(PRESSED_KEYS)
             PLAYER.moveWASD(PRESSED_KEYS)
 
             # Checking boundaries for player
